@@ -2,59 +2,52 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#FF5722">
+    <meta name="description" content="خفة للتوصيل - خدمة توصيل سريعة وآمنة في تعز. اطلب عبر الواتساب الآن.">
     <title>خفة للتوصيل - تعز | سرعة وأمان وإتقان</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
+
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Cairo & Tajawal -->
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            orange: '#FF5722',
-                            yellow: '#FFC107',
-                            amber: '#FF9800',
-                            blue: '#0284C7',
-                            lightBg: '#FAFAFA',
-                            cardBg: '#FFFFFF'
-                        }
+                        brand: { orange: '#FF5722', amber: '#FF9800', blue: '#0284C7' }
                     },
-                    fontFamily: {
-                        cairo: ['Cairo', 'sans-serif'],
-                        tajawal: ['Tajawal', 'sans-serif']
-                    }
+                    fontFamily: { cairo: ['Cairo', 'sans-serif'] }
                 }
             }
         }
     </script>
 
     <style>
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Cairo', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
             overflow-x: hidden;
-        }
-
-        /* Smooth Glassmorphism */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .gradient-text {
             background: linear-gradient(135deg, #FF5722 0%, #FF9800 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -63,195 +56,261 @@
             box-shadow: 0 8px 20px -4px rgba(255, 87, 34, 0.4);
             transition: all 0.3s ease;
         }
+        .gradient-btn:active { transform: scale(0.98); }
 
-        .gradient-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px -4px rgba(255, 87, 34, 0.5);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
-        .kuraimi-card {
-            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
-            box-shadow: 0 12px 30px -5px rgba(2, 132, 199, 0.35);
-        }
-
-        /* Floating animation for hero elements */
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(1deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
+        .floating-anim { animation: float 4s ease-in-out infinite; }
 
-        .floating-anim {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        /* Custom Toast Notification */
         #toast {
-            visibility: hidden;
-            min-width: 250px;
-            transform: translateY(100px);
+            visibility: hidden; opacity: 0; transform: translateY(20px);
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
+        #toast.show { visibility: visible; opacity: 1; transform: translateY(0); }
 
-        #toast.show {
-            visibility: visible;
-            transform: translateY(0);
+        @media (max-width: 640px) {
+            input, select, textarea { font-size: 16px !important; }
+        }
+
+        .form-field { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+        .form-field:focus {
+            outline: none; border-color: #FF5722;
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.15);
+        }
+
+        /* Swiper - equal height slides */
+        .services-swiper .swiper-slide,
+        .reviews-swiper .swiper-slide { height: auto; }
+        .services-swiper .swiper-wrapper,
+        .reviews-swiper .swiper-wrapper { align-items: stretch; }
+
+        /* Swiper pagination bullets styling */
+        .swiper-pagination-bullet {
+            background-color: #cbd5e1 !important;
+            opacity: 1 !important;
+            width: 8px !important;
+            height: 8px !important;
+            transition: all 0.3s ease;
+        }
+        .swiper-pagination-bullet-active {
+            background: linear-gradient(135deg, #FF5722 0%, #FF9800 100%) !important;
+            width: 24px !important;
+            border-radius: 4px !important;
+        }
+
+        @media (max-width: 768px) {
+            body { padding-bottom: 70px; }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-orange-500 selection:text-white">
+<body class="antialiased selection:bg-orange-500 selection:text-white">
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-24 right-5 z-50 bg-emerald-600 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3">
-        <i class="fa-solid fa-circle-check text-xl"></i>
-        <span id="toast-message" class="font-semibold text-sm">تم نسخ رقم الحساب بنجاح!</span>
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 bg-emerald-600 text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-2 max-w-[90vw]">
+        <i class="fa-solid fa-circle-check text-lg shrink-0"></i>
+        <span id="toast-message" class="font-semibold text-sm">تم بنجاح!</span>
     </div>
 
-    <!-- Floating WhatsApp Action Button -->
-    <a href="https://wa.me/967730319886?text=مرحباً%20خفة%20للتوصيل،%20أريد%20طلب%20خدمة%20توصيل" 
-       target="_blank" 
-       rel="noopener"
-       aria-label="تواصل عبر الواتساب"
-       class="fixed bottom-6 left-6 z-40 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center transition-all transform hover:scale-110 active:scale-95 group">
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
-        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-bold px-0 group-hover:px-2 text-sm">
-            تواصل سريع
-        </span>
-    </a>
+    <!-- Header -->
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="h-16 sm:h-20 flex items-center justify-between">
 
-    <!-- Navbar Header -->
-    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div class="max-w-7xl mx-mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
-                    <i class="fa-solid fa-bolt text-2xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-2xl font-black tracking-tight text-slate-900 leading-none">خِفّـة <span class="text-orange-500 text-sm font-bold">للتوصيل</span></h1>
-                    <p class="text-xs text-slate-500 font-medium mt-1"><i class="fa-solid fa-location-dot text-orange-500 ml-1"></i> تعز - اليمن</p>
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-white shadow-lg shadow-orange-500/30">
+                        <i class="fa-solid fa-bolt text-lg sm:text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-2xl font-black tracking-tight text-slate-900 leading-none">
+                            خِفّـة <span class="text-orange-500 text-[11px] sm:text-sm font-bold">للتوصيل</span>
+                        </h1>
+                        <p class="text-[10px] sm:text-xs text-slate-500 font-medium mt-1">
+                            <i class="fa-solid fa-location-dot text-orange-500 ml-1"></i> تعز - اليمن
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center gap-1">
+                    <a href="#home" class="px-4 py-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 font-bold text-sm transition">الرئيسية</a>
+                    <a href="#services" class="px-4 py-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 font-bold text-sm transition">خدماتنا</a>
+                    <a href="#features" class="px-4 py-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 font-bold text-sm transition">المميزات</a>
+                    <a href="#reviews" class="px-4 py-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 font-bold text-sm transition">التقييمات</a>
+                    <a href="#order-section" class="px-4 py-2 rounded-xl text-slate-700 hover:bg-orange-50 hover:text-orange-600 font-bold text-sm transition">اطلب الآن</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href="tel:730319886" aria-label="اتصال" class="hidden sm:flex items-center justify-center w-10 h-10 rounded-xl bg-orange-50 text-orange-600 hover:bg-orange-100 font-bold text-sm transition">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <a href="#order-section" class="gradient-btn text-white px-3 sm:px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-motorcycle"></i>
+                        <span>اطلب الآن</span>
+                    </a>
+                    <!-- Mobile Menu Toggle -->
+                    <button onclick="toggleMenu()" aria-label="فتح القائمة" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        <i id="menuIcon" class="fa-solid fa-bars text-lg"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Quick Navigation / Call Buttons -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <a href="tel:730319886" class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-orange-50 text-orange-600 hover:bg-orange-100 font-bold text-sm transition">
-                    <i class="fa-solid fa-phone"></i>
-                    <span>730 319 886</span>
-                </a>
-                <a href="#quick-order-section" class="gradient-btn text-white px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-motorcycle text-lg"></i>
-                    <span>اطلب الآن</span>
-                </a>
+            <!-- Mobile Menu Panel -->
+            <div id="mobileMenu" class="hidden lg:hidden pb-4">
+                <nav class="bg-slate-50 rounded-2xl p-2 border border-slate-100 space-y-1">
+                    <a href="#home" onclick="closeMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-white hover:text-orange-600 font-bold text-sm transition">
+                        <i class="fa-solid fa-house text-orange-500 w-5"></i>
+                        <span>الرئيسية</span>
+                    </a>
+                    <a href="#services" onclick="closeMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-white hover:text-orange-600 font-bold text-sm transition">
+                        <i class="fa-solid fa-motorcycle text-orange-500 w-5"></i>
+                        <span>خدماتنا</span>
+                    </a>
+                    <a href="#features" onclick="closeMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-white hover:text-orange-600 font-bold text-sm transition">
+                        <i class="fa-solid fa-star text-orange-500 w-5"></i>
+                        <span>المميزات</span>
+                    </a>
+                    <a href="#reviews" onclick="closeMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-white hover:text-orange-600 font-bold text-sm transition">
+                        <i class="fa-solid fa-comments text-orange-500 w-5"></i>
+                        <span>آراء العملاء</span>
+                    </a>
+                    <a href="#order-section" onclick="closeMenu()" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-white hover:text-orange-600 font-bold text-sm transition">
+                        <i class="fa-brands fa-whatsapp text-emerald-500 w-5"></i>
+                        <span>طلب توصيل</span>
+                    </a>
+                    <a href="tel:730319886" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white text-orange-600 font-bold text-sm transition border border-orange-100 mt-1">
+                        <i class="fa-solid fa-phone text-orange-500 w-5"></i>
+                        <span dir="ltr">730 319 886</span>
+                    </a>
+                </nav>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Body -->
     <main>
-        <!-- Hero Section -->
-        <section class="relative pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden">
-            <!-- Background Decorative Blurs -->
-            <div class="absolute top-10 right-10 w-72 h-72 bg-orange-200/50 rounded-full blur-3xl -z-10 pointer-events-none"></div>
-            <div class="absolute bottom-0 left-10 w-96 h-96 bg-blue-200/40 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+        <!-- Hero -->
+        <section id="home" class="relative pt-8 pb-12 sm:pt-16 sm:pb-24 overflow-hidden scroll-mt-20">
+            <div class="absolute top-10 right-0 w-64 h-64 sm:w-80 sm:h-80 bg-orange-200/50 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-72 h-72 sm:w-96 sm:h-96 bg-blue-200/40 rounded-full blur-3xl -z-10 pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                    
-                    <!-- Text Content Column -->
-                    <div class="lg:col-span-7 text-center lg:text-right space-y-6">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100/80 border border-orange-200 text-orange-700 text-xs sm:text-sm font-bold">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+                    <!-- Text -->
+                    <div class="lg:col-span-7 text-center lg:text-right space-y-5 sm:space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-orange-100/80 border border-orange-200 text-orange-700 text-[11px] sm:text-sm font-bold">
                             <span class="flex h-2 w-2 rounded-full bg-orange-600 animate-ping"></span>
-                            خدمة التوصيل الأسرع والأوثق في تعز 🛵✨
+                            خدمة التوصيل الأسرع والأوثق في تعز 🛵
                         </div>
 
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight">
+                        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight">
                             سرعة، أمان، وراحة بال..<br>
                             <span class="gradient-text">طلبك يوصل لحد باب بيتك!</span>
                         </h1>
 
-                        <p class="text-slate-600 text-lg sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                            سواء كنت تريد توصيل طلبات المطاعم، الشحنات الشخصية، المستلزمات الطبية أو البضائع داخل تعز، فريق <strong class="text-orange-600">خفة</strong> جاهز لخدمتك بأعلى سرعة وأقل تكلفة.
+                        <p class="text-slate-600 text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            سواء كنت تريد توصيل طلبات المطاعم، الشحنات الشخصية، المستلزمات الطبية أو البضائع داخل تعز، فريق <strong class="text-orange-600">خفة</strong> جاهز لخدمتك بأعلى سرعة.
                         </p>
 
-                        <!-- CTA Action Buttons -->
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                            <a href="https://wa.me/967730319886?text=مرحباً%20خفة،%20أريد%20طلب%20توصيل%20جديد" 
-                               target="_blank" 
-                               rel="noopener"
-                               class="gradient-btn text-white text-lg font-extrabold px-8 py-4 rounded-2xl flex items-center justify-center gap-3">
+                        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start pt-2 sm:pt-4">
+                            <a href="https://wa.me/967730319886?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AE%D9%81%D8%A9%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D8%AA%D9%88%D8%B5%D9%8A%D9%84"
+                               target="_blank" rel="noopener noreferrer"
+                               class="gradient-btn text-white text-base sm:text-lg font-extrabold px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl flex items-center justify-center gap-3">
                                 <i class="fa-brands fa-whatsapp text-2xl"></i>
                                 <span>اطلب عبر الواتساب</span>
                             </a>
-                            <a href="#payment-section" class="bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 text-lg font-bold px-8 py-4 rounded-2xl flex items-center justify-center gap-2 shadow-sm transition">
-                                <i class="fa-solid fa-wallet text-sky-600"></i>
-                                <span>طرق الدفع (الكريمي)</span>
+                            <a href="#order-section" class="bg-white border-2 border-slate-200 hover:border-orange-300 text-slate-700 hover:text-orange-600 text-base sm:text-lg font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl flex items-center justify-center gap-2 shadow-sm transition">
+                                <i class="fa-solid fa-clipboard-list text-orange-500"></i>
+                                <span>نموذج الطلب</span>
                             </a>
                         </div>
 
-                        <!-- Quick Info Badges -->
-                        <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-200/80 max-w-lg mx-auto lg:mx-0">
+                        <div class="pt-6 grid grid-cols-3 gap-3 sm:gap-4 border-t border-slate-200/80 max-w-lg mx-auto lg:mx-0">
                             <div>
-                                <h2 class="text-2xl sm:text-3xl font-black text-slate-800">100%</h2>
-                                <p class="text-xs sm:text-sm text-slate-500 font-semibold">أمان وموثوقية</p>
+                                <h2 class="text-xl sm:text-3xl font-black text-slate-800">100%</h2>
+                                <p class="text-[11px] sm:text-sm text-slate-500 font-semibold">أمان وموثوقية</p>
+                            </div>
+                            <div class="border-r border-l border-slate-200/80">
+                                <h2 class="text-xl sm:text-3xl font-black text-slate-800">24/7</h2>
+                                <p class="text-[11px] sm:text-sm text-slate-500 font-semibold">جاهزون دائماً</p>
                             </div>
                             <div>
-                                <h2 class="text-2xl sm:text-3xl font-black text-slate-800">24/7</h2>
-                                <p class="text-xs sm:text-sm text-slate-500 font-semibold">تغطية وشغف</p>
-                            </div>
-                            <div>
-                                <h2 class="text-2xl sm:text-3xl font-black text-slate-800">تعز</h2>
-                                <p class="text-xs sm:text-sm text-slate-500 font-semibold">تغطية كل الأحياء</p>
+                                <h2 class="text-xl sm:text-3xl font-black text-slate-800">تعز</h2>
+                                <p class="text-[11px] sm:text-sm text-slate-500 font-semibold">تغطية كل الأحياء</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Graphic Illustration Card -->
-                    <div class="lg:col-span-5 flex justify-center">
+                    <!-- Motorcycle Image -->
+                    <div class="lg:col-span-5 flex justify-center order-first lg:order-last">
                         <div class="relative w-full max-w-md">
-                            <!-- Floating Card Badge 1 -->
-                            <div class="absolute -top-4 -right-4 bg-white rounded-2xl p-4 shadow-xl z-20 flex items-center gap-3 border border-slate-100 floating-anim">
-                                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-bold">
+
+                            <!-- Floating Badge 1 -->
+                            <div class="hidden sm:flex absolute -top-3 -right-3 bg-white rounded-2xl px-3 py-2.5 shadow-xl z-20 items-center gap-2 border border-slate-100 floating-anim">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg">
                                     <i class="fa-solid fa-clock"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs text-slate-400 font-bold">زمن التوصيل</div>
-                                    <div class="text-sm font-extrabold text-slate-800">قياسي وسريع جداً</div>
+                                    <div class="text-[10px] text-slate-400 font-bold">زمن التوصيل</div>
+                                    <div class="text-xs font-extrabold text-slate-800">سريع جداً</div>
                                 </div>
                             </div>
 
-                            <!-- Main Graphic Card -->
-                            <div class="glass-card rounded-3xl p-8 text-center relative overflow-hidden border border-white shadow-2xl">
-                                <div class="w-28 h-28 bg-gradient-to-tr from-orange-500 to-amber-300 rounded-full mx-auto flex items-center justify-center text-white text-5xl shadow-xl shadow-orange-500/20 mb-6">
-                                    <i class="fa-solid fa-motorcycle"></i>
+                            <!-- Image Card -->
+                            <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
+                                <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=800&q=80&auto=format&fit=crop"
+                                     alt="موتور توصيل خفة للتوصيل في تعز"
+                                     class="w-full h-[340px] sm:h-[420px] object-cover"
+                                     loading="eager"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="hidden w-full h-[340px] sm:h-[420px] bg-gradient-to-tr from-orange-500 to-amber-400 items-center justify-center">
+                                    <i class="fa-solid fa-motorcycle text-white text-8xl"></i>
                                 </div>
 
-                                <h3 class="text-2xl font-black text-slate-800 mb-2">خفة للتوصيل الفوري</h3>
-                                <p class="text-slate-500 text-sm mb-6">نصل إليك في جميع شوارع وأحياء مدينة تعز بكل خفة وسرعة!</p>
+                                <!-- Overlay -->
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
 
-                                <div class="bg-orange-50 rounded-2xl p-4 border border-orange-100 flex items-center justify-between text-right">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center">
-                                            <i class="fa-solid fa-phone-volume"></i>
+                                <!-- Live badge -->
+                                <div class="absolute top-4 right-4 bg-white/95 backdrop-blur-md rounded-full px-3 py-1.5 flex items-center gap-2 shadow-lg">
+                                    <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span class="text-xs font-bold text-slate-800">متاح الآن</span>
+                                </div>
+
+                                <!-- Info Card on image -->
+                                <div class="absolute bottom-4 right-4 left-4 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl flex items-center justify-between">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-400 text-white flex items-center justify-center shadow-md">
+                                            <i class="fa-solid fa-motorcycle"></i>
                                         </div>
                                         <div>
-                                            <p class="text-xs text-slate-500 font-medium">رقم الطلبات والاتصال</p>
-                                            <p class="text-lg font-black text-slate-900 tracking-wider" dir="ltr">730 319 886</p>
+                                            <p class="text-[10px] text-slate-500 font-bold">خفة للتوصيل</p>
+                                            <p class="text-sm font-black text-slate-900">جاهزون لطلبك</p>
                                         </div>
                                     </div>
-                                    <a href="tel:730319886" class="bg-orange-600 hover:bg-orange-700 text-white p-2.5 rounded-xl transition">
-                                        <i class="fa-solid fa-arrow-left"></i>
+                                    <a href="tel:730319886" class="bg-orange-600 hover:bg-orange-700 text-white px-3 py-2 rounded-lg text-[11px] font-bold flex items-center gap-1.5 transition">
+                                        <i class="fa-solid fa-phone text-[10px]"></i>
+                                        <span dir="ltr">730 319 886</span>
                                     </a>
                                 </div>
                             </div>
 
-                            <!-- Floating Card Badge 2 -->
-                            <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-xl z-20 flex items-center gap-3 border border-slate-100 floating-anim" style="animation-delay: 2s;">
-                                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl font-bold">
+                            <!-- Floating Badge 2 -->
+                            <div class="hidden sm:flex absolute -bottom-3 -left-3 bg-white rounded-2xl px-3 py-2.5 shadow-xl z-20 items-center gap-2 border border-slate-100 floating-anim" style="animation-delay: 2s;">
+                                <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-lg">
                                     <i class="fa-solid fa-shield-halved"></i>
                                 </div>
                                 <div>
-                                    <div class="text-xs text-slate-400 font-bold">ضمان الأمان</div>
-                                    <div class="text-sm font-extrabold text-slate-800">حفظ تام للمحتويات</div>
+                                    <div class="text-[10px] text-slate-400 font-bold">ضمان الأمان</div>
+                                    <div class="text-xs font-extrabold text-slate-800">حفظ تام</div>
                                 </div>
                             </div>
                         </div>
@@ -261,195 +320,340 @@
             </div>
         </section>
 
-        <!-- Features Section (لماذا خفة) -->
-        <section class="py-16 bg-white border-y border-slate-100">
+        <!-- Services Slider -->
+        <section id="services" class="py-12 sm:py-16 bg-white border-y border-slate-100 scroll-mt-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-14">
-                    <h2 class="text-xs font-bold text-orange-600 tracking-widest uppercase mb-2">لماذا نعتبر الخيار الأفضل؟</h2>
-                    <p class="text-3xl sm:text-4xl font-black text-slate-900">مميزات تجعل <span class="gradient-text">"خفة"</span> صديقك الدائم</p>
+                <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+                    <h2 class="text-[11px] sm:text-xs font-bold text-orange-600 tracking-widest uppercase mb-2">ماذا نقدم لك؟</h2>
+                    <p class="text-2xl sm:text-4xl font-black text-slate-900">خدماتنا <span class="gradient-text">المتنوعة</span></p>
+                    <p class="text-slate-500 text-sm mt-2">نغطي احتياجاتك اليومية بسرعة واحترافية</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Feature 1 -->
-                    <div class="bg-slate-50 hover:bg-white p-8 rounded-3xl transition-all duration-300 border border-slate-100 hover:border-orange-200 hover:shadow-xl group">
-                        <div class="w-14 h-14 bg-orange-100 group-hover:bg-orange-500 text-orange-600 group-hover:text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 transition-colors">
+                <div class="swiper services-swiper !pb-12">
+                    <div class="swiper-wrapper">
+                        <!-- 1 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-100 rounded-2xl p-5 sm:p-6 h-full">
+                                <div class="w-12 h-12 rounded-xl bg-orange-500 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-orange-500/30">
+                                    <i class="fa-solid fa-utensils"></i>
+                                </div>
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">توصيل طلبات المطاعم</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">طلبك من مطعمك المفضل يوصلك ساخناً في أسرع وقت ممكن.</p>
+                            </div>
+                        </div>
+                        <!-- 2 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-100 rounded-2xl p-5 sm:p-6 h-full">
+                                <div class="w-12 h-12 rounded-xl bg-sky-500 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-sky-500/30">
+                                    <i class="fa-solid fa-box"></i>
+                                </div>
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">توصيل أغراض شخصية</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">شحناتك الشخصية والطرود توصل بأمان تام إلى بابك.</p>
+                            </div>
+                        </div>
+                        <!-- 3 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-5 sm:p-6 h-full">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-emerald-500/30">
+                                    <i class="fa-solid fa-pills"></i>
+                                </div>
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">مستلزمات طبية</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">توصيل الأدوية والمستلزمات الطبية بأسرع وقت وأعلى أمانة.</p>
+                            </div>
+                        </div>
+                        <!-- 4 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-100 rounded-2xl p-5 sm:p-6 h-full">
+                                <div class="w-12 h-12 rounded-xl bg-purple-500 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-purple-500/30">
+                                    <i class="fa-solid fa-file-lines"></i>
+                                </div>
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">توصيل مستندات</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">أوراقك ومستنداتك المهمة تصل بأمان وسرعة تامة.</p>
+                            </div>
+                        </div>
+                        <!-- 5 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-100 rounded-2xl p-5 sm:p-6 h-full">
+                                <div class="w-12 h-12 rounded-xl bg-rose-500 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-rose-500/30">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </div>
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">مشتريات سوبرماركت</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">قائمة تسوقك من أي سوبرماركت نوصلها إليك مباشرة.</p>
+                            </div>
+                        </div>
+                        <!-- 6 -->
+                        <div class="swiper-slide">
+                            <div class="bg-gradient-to-br from-amber-50 to-yellow-50 border border-amber-100 rounded-2xl p-5 sm:p-6 h-full">
+                                <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center text-xl mb-4 shadow-lg shadow-amber-500/30">
+                                    <i class="fa-solid fa-truck-fast"></i>
+                                </div>
+                                <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2">بضائع وشحنات تجارية</h3>
+                                <p class="text-sm text-slate-600 leading-relaxed">توصيل بضائع المتاجر والمشاريع الصغيرة بسرعة وأمان.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="services-pagination flex justify-center"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="py-12 sm:py-16 bg-slate-50 scroll-mt-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+                    <h2 class="text-[11px] sm:text-xs font-bold text-orange-600 tracking-widest uppercase mb-2">لماذا نعتبر الخيار الأفضل؟</h2>
+                    <p class="text-2xl sm:text-4xl font-black text-slate-900">مميزات تجعل <span class="gradient-text">"خفة"</span> صديقك الدائم</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+                    <div class="bg-white hover:bg-white p-6 sm:p-8 rounded-3xl transition-all duration-300 border border-slate-100 hover:border-orange-200 hover:shadow-xl group">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-orange-100 group-hover:bg-orange-500 text-orange-600 group-hover:text-white rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 transition-colors">
                             <i class="fa-solid fa-bolt-lightning"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3">سرعة فائقة</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            نمتلك طاقماً جاهزاً وموزعاً بذكاء في أحياء تعز للوصول إليك وأخذ طلبك وتوصيله بأقل وقت ممكن.
-                        </p>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">سرعة فائقة</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">طاقم جاهز وموزع بذكاء في أحياء تعز للوصول إليك بأقل وقت ممكن.</p>
                     </div>
-
-                    <!-- Feature 2 -->
-                    <div class="bg-slate-50 hover:bg-white p-8 rounded-3xl transition-all duration-300 border border-slate-100 hover:border-orange-200 hover:shadow-xl group">
-                        <div class="w-14 h-14 bg-blue-100 group-hover:bg-sky-600 text-sky-600 group-hover:text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 transition-colors">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl transition-all duration-300 border border-slate-100 hover:border-orange-200 hover:shadow-xl group">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-sky-100 group-hover:bg-sky-600 text-sky-600 group-hover:text-white rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 transition-colors">
                             <i class="fa-solid fa-box-archive"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3">أمان وحفظ تام</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            نتعامل مع كل غرض أو طلب بحرص واهتمام شديدين كأنه ملكنا الخاص حتى يصل إليك سليماً تماماً.
-                        </p>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">أمان وحفظ تام</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">نتعامل مع كل طلب بحرص واهتمام حتى يصل إليك سليماً تماماً.</p>
                     </div>
-
-                    <!-- Feature 3 -->
-                    <div class="bg-slate-50 hover:bg-white p-8 rounded-3xl transition-all duration-300 border border-slate-100 hover:border-orange-200 hover:shadow-xl group">
-                        <div class="w-14 h-14 bg-emerald-100 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 transition-colors">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl transition-all duration-300 border border-slate-100 hover:border-orange-200 hover:shadow-xl group">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-100 group-hover:bg-emerald-600 text-emerald-600 group-hover:text-white rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 transition-colors">
                             <i class="fa-solid fa-map-location-dot"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3">تغطية شاملة</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            نغطي كافة مناطق وأحياء مدينة تعز الشرقية والغربية والشوارع الرئيسة والفرعية دون استثناء.
-                        </p>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">تغطية شاملة</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">نغطي كافة أحياء تعز الشرقية والغربية والشوارع الرئيسة والفرعية.</p>
                     </div>
-
-                    <!-- Feature 4 -->
-                    <div class="bg-slate-50 hover:bg-white p-8 rounded-3xl transition-all duration-300 border border-slate-100 hover:border-orange-200 hover:shadow-xl group">
-                        <div class="w-14 h-14 bg-purple-100 group-hover:bg-purple-600 text-purple-600 group-hover:text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 transition-colors">
-                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl transition-all duration-300 border border-slate-100 hover:border-orange-200 hover:shadow-xl group">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-purple-100 group-hover:bg-purple-600 text-purple-600 group-hover:text-white rounded-2xl flex items-center justify-center text-xl sm:text-2xl mb-4 sm:mb-6 transition-colors">
+                            <i class="fa-solid fa-headset"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900 mb-3">أسعار مناسبة</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            نقدم أنسب الأسعار للتوصيل داخل تعز مع مراعاة الجودة والسرعة العالية في كل مشوار.
-                        </p>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 sm:mb-3">دعم فوري</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">فريق خدمة العملاء متاح 24/7 للرد على استفساراتك ومتابعة طلبك.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Payment Methods Section (حاسب كريمي) -->
-        <section id="payment-section" class="py-16 bg-slate-50">
+        <!-- Reviews Slider -->
+        <section id="reviews" class="py-12 sm:py-16 bg-white border-y border-slate-100 scroll-mt-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                    <h2 class="text-xs font-bold text-sky-600 tracking-widest uppercase mb-2">الدفع السريع والإلكتروني</h2>
-                    <p class="text-3xl sm:text-4xl font-black text-slate-900">طرق الدفع المتاحة</p>
-                    <p class="text-slate-500 text-sm mt-2">نوفر لك خيارات سريعة وآمنة لتحويل رسوم التوصيل أو قيمة الطلبات</p>
+                <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+                    <h2 class="text-[11px] sm:text-xs font-bold text-orange-600 tracking-widest uppercase mb-2">ماذا قال عملاؤنا؟</h2>
+                    <p class="text-2xl sm:text-4xl font-black text-slate-900">تقييمات <span class="gradient-text">العملاء</span></p>
+                    <div class="flex items-center justify-center flex-wrap gap-2 mt-3">
+                        <div class="flex text-amber-400 text-base sm:text-lg">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-sm font-black text-slate-800">4.9 / 5</span>
+                        <span class="text-xs sm:text-sm text-slate-500 font-medium">من أكثر من 250 تقييم</span>
+                    </div>
                 </div>
 
-                <div class="max-w-xl mx-auto">
-                    <!-- Styled Kuraimi Card -->
-                    <div class="kuraimi-card rounded-3xl p-6 sm:p-8 text-white relative overflow-hidden shadow-2xl">
-                        <!-- Card Decorative Circles -->
-                        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
-                        <div class="absolute top-0 left-0 w-32 h-32 bg-sky-400/20 rounded-full blur-lg pointer-events-none"></div>
-
-                        <div class="flex items-center justify-between mb-8">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl">
-                                    <i class="fa-solid fa-building-columns"></i>
+                <div class="swiper reviews-swiper !pb-12">
+                    <div class="swiper-wrapper">
+                        <!-- Review 1 -->
+                        <div class="swiper-slide">
+                            <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100 h-full flex flex-col">
+                                <div class="flex text-amber-400 text-sm mb-3">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
                                 </div>
-                                <div>
-                                    <p class="text-xs text-sky-100 font-medium">الدفع المباشر عبر</p>
-                                    <h3 class="text-2xl font-black tracking-wide">حاسب كريمي</h3>
+                                <p class="text-slate-700 text-sm leading-relaxed mb-4 flex-1">"خدمة ممتازة وسريعة، طلبت وجبة من مطعم والطلب وصل قبل الموعد المتوقع. تعامل راقي جداً."</p>
+                                <div class="flex items-center gap-3 pt-3 border-t border-slate-200">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-orange-500 to-amber-400 text-white flex items-center justify-center font-black text-sm shadow-md">أ</div>
+                                    <div>
+                                        <p class="font-bold text-slate-900 text-sm">أحمد الشرعبي</p>
+                                        <p class="text-xs text-slate-500">عميل دائم</p>
+                                    </div>
                                 </div>
                             </div>
-                            <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold text-sky-100">
-                                Kuraimi Express
-                            </span>
                         </div>
-
-                        <!-- Account Details Box -->
-                        <div class="bg-black/20 backdrop-blur-md rounded-2xl p-5 border border-white/10 mb-6">
-                            <p class="text-xs text-sky-200 mb-1 font-semibold">رقم الحساب (حاسب):</p>
-                            <div class="flex items-center justify-between">
-                                <span id="account-number" class="text-3xl sm:text-4xl font-mono font-black tracking-widest">2400819</span>
-                                
-                                <button onclick="copyAccount('2400819')" 
-                                        class="bg-white text-sky-800 hover:bg-sky-50 active:scale-95 px-4 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-2 shadow-md transition duration-200">
-                                    <i class="fa-regular fa-copy text-base"></i>
-                                    <span>نسخ الحساب</span>
-                                </button>
+                        <!-- Review 2 -->
+                        <div class="swiper-slide">
+                            <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100 h-full flex flex-col">
+                                <div class="flex text-amber-400 text-sm mb-3">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-700 text-sm leading-relaxed mb-4 flex-1">"أفضل خدمة توصيل في تعز بلا منافس. صاحبة مطعم وأتعامل معهم يومياً، أمانة والتزام."</p>
+                                <div class="flex items-center gap-3 pt-3 border-t border-slate-200">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-rose-400 text-white flex items-center justify-center font-black text-sm shadow-md">ف</div>
+                                    <div>
+                                        <p class="font-bold text-slate-900 text-sm">فاطمة الحكيمي</p>
+                                        <p class="text-xs text-slate-500">صاحبة مطعم</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="flex items-center justify-between text-xs text-sky-100 font-medium">
-                            <span><i class="fa-solid fa-check-circle ml-1"></i> اسم الخدمة: خفة للتوصيل</span>
-                            <span>تأكيد فوري بعد التحويل</span>
+                        <!-- Review 3 -->
+                        <div class="swiper-slide">
+                            <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100 h-full flex flex-col">
+                                <div class="flex text-amber-400 text-sm mb-3">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-700 text-sm leading-relaxed mb-4 flex-1">"استخدمتهم عدة مرات لمستلزمات طبية مهمة، دائماً في الموعد. أنصح الجميع بالتعامل معهم."</p>
+                                <div class="flex items-center gap-3 pt-3 border-t border-slate-200">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-sky-500 to-blue-400 text-white flex items-center justify-center font-black text-sm shadow-md">م</div>
+                                    <div>
+                                        <p class="font-bold text-slate-900 text-sm">محمد قائد</p>
+                                        <p class="text-xs text-slate-500">عميل</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Review 4 -->
+                        <div class="swiper-slide">
+                            <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100 h-full flex flex-col">
+                                <div class="flex text-amber-400 text-sm mb-3">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-700 text-sm leading-relaxed mb-4 flex-1">"سرعة في التوصيل وأسعار مناسبة، فريق محترم ومتعاون. تجربة راقية مع خفة."</p>
+                                <div class="flex items-center gap-3 pt-3 border-t border-slate-200">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-white flex items-center justify-center font-black text-sm shadow-md">س</div>
+                                    <div>
+                                        <p class="font-bold text-slate-900 text-sm">سارة الأهدل</p>
+                                        <p class="text-xs text-slate-500">عميلة</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Review 5 -->
+                        <div class="swiper-slide">
+                            <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-100 h-full flex flex-col">
+                                <div class="flex text-amber-400 text-sm mb-3">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star"></i>
+                                </div>
+                                <p class="text-slate-700 text-sm leading-relaxed mb-4 flex-1">"فريق محترف وملتزم، توصيل البضائع للتجار صار أسهل معهم. خدمة تستحق الثناء."</p>
+                                <div class="flex items-center gap-3 pt-3 border-t border-slate-200">
+                                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-violet-400 text-white flex items-center justify-center font-black text-sm shadow-md">ع</div>
+                                    <div>
+                                        <p class="font-bold text-slate-900 text-sm">علي المقطري</p>
+                                        <p class="text-xs text-slate-500">تاجر</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="reviews-pagination flex justify-center"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Interactive Order Calculator & Quick Form Section -->
-        <section id="quick-order-section" class="py-16 bg-white">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl">
-                    <div class="text-center max-w-xl mx-auto mb-8">
-                        <span class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 inline-flex items-center justify-center text-2xl mb-3">
-                            <i class="fa-solid fa-calculator"></i>
+        <!-- Order Form -->
+        <section id="order-section" class="py-12 sm:py-16 bg-slate-50 scroll-mt-20">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="glass-card rounded-3xl p-5 sm:p-10 border border-slate-200 shadow-xl">
+                    <div class="text-center max-w-xl mx-auto mb-6 sm:mb-8">
+                        <span class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 inline-flex items-center justify-center text-xl sm:text-2xl mb-3">
+                            <i class="fa-brands fa-whatsapp"></i>
                         </span>
-                        <h3 class="text-2xl sm:text-3xl font-black text-slate-900">حاسبة التوصيل التقديرية والطلب المباشر</h3>
-                        <p class="text-slate-500 text-sm mt-1">اختر منطقتك لنحسب لك قيمة المشوار التقديرية وإرسال طلبك فوراً</p>
+                        <h3 class="text-xl sm:text-3xl font-black text-slate-900">اطلب خدمة التوصيل الآن</h3>
+                        <p class="text-slate-500 text-sm mt-1.5">املأ البيانات التالية وسيتم إرسال طلبك مباشرة عبر الواتساب</p>
                     </div>
 
-                    <form id="orderForm" onsubmit="sendWhatsAppOrder(event)" class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <!-- Select Area -->
+                    <form id="orderForm" onsubmit="sendWhatsAppOrder(event)" class="space-y-4 sm:space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">منطقة الاستلام / التسليم في تعز</label>
-                                <select id="areaSelect" onchange="calculateFee()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium">
-                                    <option value="1000">شارع جمال / الوسط (تقديري 1000 ر.ي)</option>
-                                    <option value="1200">الحوبان / جولة القصر (تقديري 1200 ر.ي)</option>
-                                    <option value="1500">المسبح / الروضة / المجلية (تقديري 1500 ر.ي)</option>
-                                    <option value="1500">بير باشا / الحصب (تقديري 1500 ر.ي)</option>
-                                    <option value="1800">عصيفرة / وادي القاضي (تقديري 1800 ر.ي)</option>
-                                    <option value="2000">مناطق أطراف تعز الأخرى (تقديري 2000 ر.ي)</option>
-                                </select>
+                                <label for="customerName" class="block text-sm font-bold text-slate-700 mb-1.5">الاسم الكامل</label>
+                                <input type="text" id="customerName" required placeholder="اسمك الكريم"
+                                       class="form-field w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-medium">
                             </div>
-
-                            <!-- Order Type -->
                             <div>
-                                <label class="block text-sm font-bold text-slate-700 mb-2">نوع الطلب</label>
-                                <select id="orderType" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium">
-                                    <option value="وجبة مطعم">وجبة مطعم / طعام</option>
-                                    <option value="أغراض شخصية / طرد">أغراض شخصية / طرد أو علاج</option>
-                                    <option value="مستندات وأوراق">مستندات وأوراق مهمة</option>
-                                    <option value="مشتريات سوبرماركت">مشتريات من السوبرماركت</option>
+                                <label for="areaSelect" class="block text-sm font-bold text-slate-700 mb-1.5">المنطقة في تعز</label>
+                                <select id="areaSelect" required
+                                        class="form-field w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-medium">
+                                    <option value="" disabled selected>اختر المنطقة</option>
+                                    <option value="شارع جمال / الوسط">شارع جمال / الوسط</option>
+                                    <option value="الحوبان / جولة القصر">الحوبان / جولة القصر</option>
+                                    <option value="المسبح / الروضة / المجلية">المسبح / الروضة / المجلية</option>
+                                    <option value="بير باشا / الحصب">بير باشا / الحصب</option>
+                                    <option value="عصيفرة / وادي القاضي">عصيفرة / وادي القاضي</option>
+                                    <option value="مناطق أخرى في تعز">مناطق أخرى في تعز</option>
                                 </select>
                             </div>
                         </div>
 
-                        <!-- Details Textarea -->
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">تفاصيل الطلب والعنوان بالتفصيل</label>
-                            <textarea id="orderDetails" rows="3" required placeholder="مثال: استلام وجبة من مطعم (...) وتوصيلها إلى حي المسبح بجانب مدرسه (...)" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500 font-medium text-sm"></textarea>
+                            <label for="orderType" class="block text-sm font-bold text-slate-700 mb-1.5">نوع الطلب</label>
+                            <select id="orderType" required
+                                    class="form-field w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 font-medium">
+                                <option value="" disabled selected>اختر نوع الطلب</option>
+                                <option value="وجبة مطعم / طعام">وجبة مطعم / طعام</option>
+                                <option value="أغراض شخصية / طرد أو علاج">أغراض شخصية / طرد أو علاج</option>
+                                <option value="مستندات وأوراق مهمة">مستندات وأوراق مهمة</option>
+                                <option value="مشتريات سوبرماركت">مشتريات من السوبرماركت</option>
+                                <option value="بضائع وشحنات تجارية">بضائع وشحنات تجارية</option>
+                                <option value="أخرى">أخرى</option>
+                            </select>
                         </div>
 
-                        <!-- Estimated Total Box -->
-                        <div class="bg-orange-50 rounded-2xl p-4 border border-orange-200 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-orange-700 font-bold block">التكلفة التقديرية للتوصيل:</span>
-                                <span id="estimatedFee" class="text-2xl font-black text-orange-600">1000 ريال يمني</span>
-                            </div>
-                            <span class="text-xs text-slate-500 font-medium max-w-[150px] text-left">قد تختلف التكلفة بحسب المسافة الدقيقة للطلب</span>
+                        <div>
+                            <label for="orderDetails" class="block text-sm font-bold text-slate-700 mb-1.5">تفاصيل الطلب والعنوان</label>
+                            <textarea id="orderDetails" rows="4" required
+                                      placeholder="مثال: استلام وجبة من مطعم (...) وتوصيلها إلى حي المسبح، بجانب مدرسة (...)"
+                                      class="form-field w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-800 font-medium text-sm resize-none"></textarea>
                         </div>
 
-                        <!-- Submit via WhatsApp -->
-                        <button type="submit" class="w-full gradient-btn text-white py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-lg">
+                        <div class="bg-orange-50 rounded-2xl p-3.5 sm:p-4 border border-orange-200 flex items-start gap-3">
+                            <i class="fa-solid fa-circle-info text-orange-500 mt-0.5 shrink-0"></i>
+                            <p class="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                                سيتم الاتفاق على تفاصيل التوصيل والرسوم مباشرة عبر الواتساب مع فريق خدمة العملاء.
+                            </p>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full gradient-btn text-white py-3.5 sm:py-4 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-3 shadow-lg">
                             <i class="fa-brands fa-whatsapp text-2xl"></i>
-                            <span>إرسال الطلب عبر الواتساب الآن</span>
+                            <span>إرسال الطلب عبر الواتساب</span>
                         </button>
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- Direct Contact Footer Banner -->
-        <section class="py-12 bg-slate-900 text-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <!-- Contact Banner -->
+        <section class="py-12 sm:py-14 bg-slate-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
                 <div class="inline-block p-3 rounded-2xl bg-white/10 backdrop-blur-md">
-                    <i class="fa-solid fa-headset text-3xl text-orange-400"></i>
+                    <i class="fa-solid fa-headset text-2xl sm:text-3xl text-orange-400"></i>
                 </div>
-                <h3 class="text-3xl font-black">جاهزون لخدمتك في أي وقت!</h3>
-                <p class="text-slate-400 text-sm max-w-lg mx-auto">تواصل معنا مباشرة عبر الاتصال أو الواتساب وسنصل إليك أينما كنت في مدينة تعز.</p>
-                
-                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                    <a href="tel:730319886" class="bg-white text-slate-900 hover:bg-slate-100 font-black px-6 py-3 rounded-xl flex items-center gap-2 text-base transition">
+                <h3 class="text-2xl sm:text-3xl font-black">جاهزون لخدمتك في أي وقت!</h3>
+                <p class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto">تواصل معنا مباشرة عبر الاتصال أو الواتساب وسنصل إليك أينما كنت في مدينة تعز.</p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2">
+                    <a href="tel:730319886"
+                       class="w-full sm:w-auto bg-white text-slate-900 hover:bg-slate-100 font-black px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-base transition">
                         <i class="fa-solid fa-phone text-orange-500"></i>
                         <span dir="ltr">730 319 886</span>
                     </a>
-                    <a href="https://wa.me/967730319886" target="_blank" rel="noopener" class="bg-emerald-600 hover:bg-emerald-500 text-white font-black px-6 py-3 rounded-xl flex items-center gap-2 text-base transition">
+                    <a href="https://wa.me/967730319886" target="_blank" rel="noopener noreferrer"
+                       class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-black px-6 py-3 rounded-xl flex items-center justify-center gap-2 text-base transition">
                         <i class="fa-brands fa-whatsapp text-xl"></i>
                         <span>واتساب مباشر</span>
                     </a>
@@ -465,59 +669,95 @@
         </div>
     </footer>
 
-    <!-- JavaScript Logic -->
-    <script>
-        // Copy Kuraimi Account Number with Custom Feedback
-        function copyAccount(accNum) {
-            // Using standard execCommand fallback for seamless clipboard copying
-            const el = document.createElement('textarea');
-            el.value = accNum;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/967730319886?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AE%D9%81%D8%A9%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B7%D9%84%D8%A8%20%D8%AA%D9%88%D8%B5%D9%8A%D9%84"
+       target="_blank" rel="noopener noreferrer" aria-label="تواصل عبر الواتساب"
+       class="fixed bottom-5 left-5 z-40 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
 
-            showToast('تم نسخ رقم حساب الكريمي (' + accNum + ') بنجاح!');
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // ====== Mobile Menu ======
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            const isOpen = !menu.classList.contains('hidden');
+            icon.className = isOpen ? 'fa-solid fa-xmark text-lg' : 'fa-solid fa-bars text-lg';
+        }
+        function closeMenu() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+            document.getElementById('menuIcon').className = 'fa-solid fa-bars text-lg';
         }
 
-        // Show Toast Function
+        // ====== Swiper: Services ======
+        new Swiper('.services-swiper', {
+            slidesPerView: 1.15,
+            spaceBetween: 14,
+            grabCursor: true,
+            loop: true,
+            autoplay: { delay: 3500, disableOnInteraction: false },
+            pagination: { el: '.services-pagination', clickable: true },
+            breakpoints: {
+                640:  { slidesPerView: 2.15, spaceBetween: 16 },
+                1024: { slidesPerView: 3.15, spaceBetween: 20 },
+                1280: { slidesPerView: 3.5,  spaceBetween: 22 }
+            }
+        });
+
+        // ====== Swiper: Reviews ======
+        new Swiper('.reviews-swiper', {
+            slidesPerView: 1.1,
+            spaceBetween: 16,
+            grabCursor: true,
+            loop: true,
+            autoplay: { delay: 4500, disableOnInteraction: false },
+            pagination: { el: '.reviews-pagination', clickable: true },
+            breakpoints: {
+                640:  { slidesPerView: 2, spaceBetween: 18 },
+                1024: { slidesPerView: 3, spaceBetween: 20 }
+            }
+        });
+
+        // ====== Send WhatsApp Order ======
+        function sendWhatsAppOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('customerName').value.trim();
+            const area = document.getElementById('areaSelect').value;
+            const type = document.getElementById('orderType').value;
+            const details = document.getElementById('orderDetails').value.trim();
+
+            if (!name || !area || !type || !details) {
+                showToast('الرجاء ملء جميع الحقول المطلوبة');
+                return;
+            }
+
+            const phone = "967730319886";
+            const message =
+                `*طلب جديد - خفة للتوصيل* 🛵\n` +
+                `━━━━━━━━━━━━━━━━\n\n` +
+                `👤 *الاسم:* ${name}\n` +
+                `📍 *المنطقة:* ${area}\n` +
+                `📦 *نوع الطلب:* ${type}\n` +
+                `📝 *التفاصيل:* ${details}\n\n` +
+                `━━━━━━━━━━━━━━━━\n` +
+                `يرجى التأكيد والبدء بالتوصيل.`;
+
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+
+        // ====== Toast ======
         function showToast(message) {
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toast-message');
-            toastMsg.innerText = message;
+            toastMsg.textContent = message;
             toast.classList.add('show');
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
-
-        // Calculate Fee based on selection
-        function calculateFee() {
-            const areaSelect = document.getElementById('areaSelect');
-            const feeDisplay = document.getElementById('estimatedFee');
-            const fee = areaSelect.value;
-            feeDisplay.innerText = `${fee} ريال يمني`;
-        }
-
-        // Redirect order directly to WhatsApp
-        function sendWhatsAppOrder(e) {
-            e.preventDefault();
-            
-            const areaText = document.getElementById('areaSelect').options[document.getElementById('areaSelect').selectedIndex].text;
-            const orderType = document.getElementById('orderType').value;
-            const orderDetails = document.getElementById('orderDetails').value;
-            const fee = document.getElementById('estimatedFee').innerText;
-
-            const phone = "967730319886";
-            const text = `*طلب جديد عبر خدمة خفة للتوصيل* 🛵%0A%0A` +
-                         `📌 *نوع الطلب:* ${encodeURIComponent(orderType)}%0A` +
-                         `📍 *المنطقة:* ${encodeURIComponent(areaText)}%0A` +
-                         `📝 *التفاصيل:* ${encodeURIComponent(orderDetails)}%0A` +
-                         `💰 *التكلفة التقديرية:* ${encodeURIComponent(fee)}%0A%0A` +
-                         `يرجى التأكيد والبدء بالتوصيل.`;
-
-            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
         }
     </script>
 </body>
